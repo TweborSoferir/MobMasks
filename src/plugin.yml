@@ -1,0 +1,15 @@
+name: MobMasks
+main: en.twebor.mobmasks.MobMasks
+description: A simple plugin to create mobmasks.
+author: Twebor
+version: 1.0.0
+website: twebor.github.io
+
+commands:
+  info:
+    description: Gives the command info
+    usage: /info
+
+  skull:
+    description: Gives a player a skull
+    usage: /skull
