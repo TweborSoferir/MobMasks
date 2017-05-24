@@ -1,5 +1,6 @@
 package en.twebor.mobmasks.commands;
 
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -8,6 +9,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.Set;
 
@@ -23,6 +25,15 @@ public class CommandInfo implements CommandExecutor {
         } else {
             if (itemInHand.hasItemMeta()) {
                 ItemMeta itemMeta = itemInHand.getItemMeta();
+
+                if (itemInHand.getType() == Material.SKULL_ITEM) {
+                    SkullMeta skullMeta = (SkullMeta) itemInHand.getItemMeta();
+                    if (skullMeta.hasOwner()) {
+                        player.sendMessage("The owner is " + skullMeta.getOwner());
+                    } else {
+                        player.sendMessage("No owner.");
+                    }
+                }
 
                 Set<ItemFlag> flagSet = itemMeta.getItemFlags();
 
