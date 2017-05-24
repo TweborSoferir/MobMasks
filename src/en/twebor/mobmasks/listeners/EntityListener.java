@@ -25,6 +25,8 @@ public class EntityListener implements Listener {
         if (MobUtil.isValidMob(type)) {
             double dropPercent = plugin.getConfig().getInt("Items.Head Drop %");
             Random random = new Random();
+
+            // Rolls a random number from 1-100 and compares it to the config drop percentage.
             if (random.nextInt(100)+1 <= dropPercent) {
                 List<ItemStack> drops = new ArrayList<>();
 

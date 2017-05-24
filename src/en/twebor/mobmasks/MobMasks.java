@@ -4,10 +4,10 @@ import en.twebor.mobmasks.commands.CommandInfo;
 import en.twebor.mobmasks.commands.CommandSkull;
 import en.twebor.mobmasks.listeners.BlockListener;
 import en.twebor.mobmasks.listeners.EntityListener;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
 
 public class MobMasks extends JavaPlugin {
     private FileConfiguration config = getConfig();
@@ -15,13 +15,14 @@ public class MobMasks extends JavaPlugin {
     public void onEnable() {
         createConfig();
         saveConfig();
-        registerListeners();
+        registerEvents();
         registerCommands();
     }
 
-    public void registerListeners() {
-        this.getServer().getPluginManager().registerEvents(new BlockListener(), this);
-        this.getServer().getPluginManager().registerEvents(new EntityListener(this), this);
+    public void registerEvents() {
+        PluginManager pm = Bukkit.getPluginManager();
+        pm.registerEvents(new BlockListener(), this);
+        pm.registerEvents(new EntityListener(this), this);
     }
 
     public void registerCommands() {

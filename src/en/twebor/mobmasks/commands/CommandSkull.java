@@ -1,7 +1,6 @@
 package en.twebor.mobmasks.commands;
 
 import en.twebor.mobmasks.utils.ItemUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.command.Command;
