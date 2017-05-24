@@ -11,6 +11,7 @@ import java.io.File;
 
 public class MobMasks extends JavaPlugin {
     private FileConfiguration config = getConfig();
+  
     @Override
     public void onEnable() {
         createConfig();
