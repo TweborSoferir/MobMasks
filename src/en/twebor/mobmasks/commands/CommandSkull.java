@@ -1,6 +1,6 @@
 package en.twebor.mobmasks.commands;
 
-import en.twebor.mobmasks.utils.MobUtil;
+import en.twebor.mobmasks.utils.ItemUtil;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.command.Command;
@@ -17,7 +17,7 @@ public class CommandSkull implements CommandExecutor {
 
         ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
 
-        MobUtil.setMaskMeta(skull, "Blaze Mask", "MHF_Blaze");
+        ItemUtil.setSkullNameAndOwner(skull, "Blaze Mask", "MHF_Blaze");
 
         player.getInventory().addItem(skull);
 
