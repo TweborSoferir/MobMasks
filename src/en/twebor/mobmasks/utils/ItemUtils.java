@@ -1,7 +1,5 @@
 package en.twebor.mobmasks.utils;
 
-import en.twebor.mobmasks.Mask;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
