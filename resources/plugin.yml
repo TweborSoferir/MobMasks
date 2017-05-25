@@ -13,3 +13,7 @@ commands:
   skull:
     description: Gives a player a skull
     usage: /skull
+
+  mobmasks:
+    description: Base command for MobMasks
+    usage: /mobmasks <help, give, info> <?>
