@@ -28,6 +28,7 @@ public class ItemUtils {
     }
 
     public static void setSkullName(ItemStack skull, String displayName) {
+        // Must specify name or else it will error. "NO OWNER" is used throughout the code.
         setSkullNameAndOwner(skull, displayName, "NO OWNER");
     }
 
