@@ -4,9 +4,9 @@ import en.twebor.mobmasks.Mask;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
-public class MobUtil {
+public class MobUtils {
     // Empty constructor, so can't be instantiated.
-    private MobUtil(){}
+    private MobUtils(){}
 
     public static boolean isValidMob(EntityType mob) {
         for (Mask mask : Mask.values()) {

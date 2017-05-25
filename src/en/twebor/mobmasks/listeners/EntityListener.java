@@ -1,6 +1,6 @@
 package en.twebor.mobmasks.listeners;
 
-import en.twebor.mobmasks.utils.MobUtil;
+import en.twebor.mobmasks.utils.MobUtils;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,7 +22,7 @@ public class EntityListener implements Listener {
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
         EntityType type = event.getEntityType();
-        if (MobUtil.isValidMob(type)) {
+        if (MobUtils.isValidMob(type)) {
             double dropPercent = plugin.getConfig().getInt("Items.Head Drop %");
             Random random = new Random();
 
@@ -31,7 +31,7 @@ public class EntityListener implements Listener {
                 List<ItemStack> drops = new ArrayList<>();
 
                 // Adds the mob's head to the drop pool.
-                drops.add(MobUtil.getSkullDrop(type));
+                drops.add(MobUtils.getSkullDrop(type));
 
                 event.getDrops().addAll(drops);
             }

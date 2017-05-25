@@ -1,13 +1,18 @@
 package en.twebor.mobmasks;
 
+import en.twebor.mobmasks.commands.CommandMobMasks;
 import en.twebor.mobmasks.commands.CommandInfo;
 import en.twebor.mobmasks.commands.CommandSkull;
 import en.twebor.mobmasks.listeners.BlockListener;
 import en.twebor.mobmasks.listeners.EntityListener;
+import en.twebor.mobmasks.listeners.InventoryListener;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MobMasks extends JavaPlugin {
     private FileConfiguration config = getConfig();
@@ -23,10 +28,12 @@ public class MobMasks extends JavaPlugin {
     public void registerEvents() {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new BlockListener(), this);
+        pm.registerEvents(new InventoryListener(), this);
         pm.registerEvents(new EntityListener(this), this);
     }
 
     public void registerCommands() {
+        this.getCommand("mobmasks").setExecutor(new CommandMobMasks());
         this.getCommand("info").setExecutor(new CommandInfo());
         this.getCommand("skull").setExecutor(new CommandSkull(this));
     }
