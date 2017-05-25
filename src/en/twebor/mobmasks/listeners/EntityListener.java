@@ -50,5 +50,4 @@ public class EntityListener implements Listener {
         }
         return false;
     }
-
 }
