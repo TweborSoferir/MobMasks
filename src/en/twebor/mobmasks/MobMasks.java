@@ -4,6 +4,7 @@ import en.twebor.mobmasks.commands.CommandInfo;
 import en.twebor.mobmasks.commands.CommandSkull;
 import en.twebor.mobmasks.listeners.BlockListener;
 import en.twebor.mobmasks.listeners.EntityListener;
+import en.twebor.mobmasks.listeners.PlayerInteractListener;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,6 +24,7 @@ public class MobMasks extends JavaPlugin {
     public void registerListeners() {
         this.getServer().getPluginManager().registerEvents(new BlockListener(), this);
         this.getServer().getPluginManager().registerEvents(new EntityListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerInteractListener(this), this);
     }
 
     public void registerCommands() {
