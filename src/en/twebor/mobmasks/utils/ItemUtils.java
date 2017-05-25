@@ -28,7 +28,6 @@ public class ItemUtils {
     }
 
     public static void setSkullName(ItemStack skull, String displayName) {
-
         setSkullNameAndOwner(skull, displayName, "NO OWNER");
     }
 
