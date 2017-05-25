@@ -5,7 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MaskUtils {
@@ -26,7 +26,7 @@ public class MaskUtils {
     }
 
     public static List<String> generateFreshLore(int skullsForRank1) {
-        List<String> newLore = new ArrayList<>();
+        List<String> newLore = Collections.emptyList();
         //TODO  Create descriptions for each mask to be default first few lines.
         //newLore.add(maskType.getDescription();
         newLore.add("Rank 0");
@@ -37,7 +37,7 @@ public class MaskUtils {
     //TODO Implement this.
     public static List<String> updateLore(List<String> oldLore) {
         //String[] splitStr = str.split("\\s+");
-        return null;
+        return Collections.emptyList();
     }
 
     public static Mask getMask(ItemStack item) {
