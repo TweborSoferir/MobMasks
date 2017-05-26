@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -42,35 +41,36 @@ public class PlayerInteractListener implements Listener {
         int[] tiers = {headsForTier1, headsForTier2, headsForTier3};
 
         String type = ""; //Used to pull description for lore
-
-        if (!mainMeta.hasOwner()) {
-            if (mainhand.getDurability() == SkullType.CREEPER.ordinal()) {
-                //Creeper case
-                type = "creeper";
-            } else if (mainhand.getDurability() == SkullType.SKELETON.ordinal()) {
-                //Skeleton case
-                type = "skeleton";
-            }
-        } else if (mainMeta.hasOwner()) {
+        if (mainMeta.hasOwner()) {
+            if (mainMeta.getOwner().equals("NO OWNER")) {
+                if (mainhand.getDurability() == SkullType.CREEPER.ordinal()) {
+                    //Creeper case
+                    type = "creeper";
+                } else if (mainhand.getDurability() == SkullType.SKELETON.ordinal()) {
+                    //Skeleton case
+                    type = "skeleton";
+                }
+            } else {
                 switch (mainMeta.getOwner()) {
-                    case "Horse Mask":
+                    case "gavertoso":
                         type = "horse";
                         break;
-                    case "Rabbit Mask":
+                    case "Natalieisawesome":
                         type = "rabbit";
                         break;
-                    case "Blaze Mask":
+                    case "MHF_Blaze":
                         type = "blaze";
                         break;
-                    case "Chicken Mask":
+                    case "MHF_Chicken":
                         type = "chicken";
                         break;
-                    case "Iron Golem Mask":
+                    case "MHF_Golem":
                         type = "iron golem";
                         break;
                     default:
                         return;
                 }
+            }
         }
         List<String> oldLore = new ArrayList<>();
         List<String> lore = new ArrayList<>();

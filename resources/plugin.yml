@@ -3,7 +3,7 @@ main: en.twebor.mobmasks.MobMasks
 description: A simple plugin to create mobmasks.
 author: Twebor and Soferir
 version: 1.0.0
-website: twebor.github.io
+website: github.com/twebor
 
 commands:
   info:
@@ -13,3 +13,7 @@ commands:
   skull:
     description: Gives a player a skull
     usage: /skull
+
+  mobmasks:
+    description: Base command for MobMasks
+    usage: /mobmasks <help, give, info> <?>

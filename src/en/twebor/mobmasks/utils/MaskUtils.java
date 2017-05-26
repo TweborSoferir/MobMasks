@@ -1,5 +1,10 @@
 package en.twebor.mobmasks.utils;
 
+import en.twebor.mobmasks.Mask;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +35,6 @@ public class MaskUtils {
         return newLore;
     }
 
-    //TODO Implement this.
     public static List<String> updateLore(List<String> oldLore, int skullsAdded,int[] tiers) {
         List<String> newLore = new ArrayList<>();
         newLore.add(oldLore.get(0)); //Description remains constant.
@@ -75,5 +79,32 @@ public class MaskUtils {
             default:
                 return "No effect";
         }
+    }
+
+    public static Mask getMask(ItemStack item) {
+        /* Only works for skulls.
+         * Returns if an item matches a mask, otherwise it will return null.
+         * This compares the owners so it will prevent players from naming masks themselves to be used.
+         **/
+        if (item.getType() != Material.SKULL_ITEM) {
+            return null;
+        }
+
+        SkullMeta meta = (SkullMeta) item.getItemMeta();
+
+        for (Mask mask : Mask.values()) {
+            SkullMeta maskMeta = (SkullMeta) mask.getMask().getItemMeta();
+
+            if (meta.getOwner().equals("NO OWNER")) {
+                if (maskMeta.getDisplayName().equals(meta.getDisplayName())) {
+                    return mask;
+                }
+            } else {
+                if (maskMeta.getOwner().equals(meta.getOwner())) {
+                    return mask;
+                }
+            }
+        }
+        return null;
     }
 }
