@@ -3,10 +3,7 @@ package en.twebor.mobmasks;
 import en.twebor.mobmasks.commands.CommandMobMasks;
 import en.twebor.mobmasks.commands.CommandInfo;
 import en.twebor.mobmasks.commands.CommandSkull;
-import en.twebor.mobmasks.listeners.BlockListener;
-import en.twebor.mobmasks.listeners.EntityListener;
-import en.twebor.mobmasks.listeners.InventoryListener;
-import en.twebor.mobmasks.listeners.PlayerInteractListener;
+import en.twebor.mobmasks.listeners.*;
 import org.bukkit.Bukkit;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -37,6 +34,7 @@ public class MobMasks extends JavaPlugin {
         pm.registerEvents(new InventoryListener(), this);
         pm.registerEvents(new PlayerInteractListener(this), this);
         pm.registerEvents(new EntityListener(this, this.enabledMobs), this);
+        pm.registerEvents(new CreeperMaskDamageListener(this), this);
     }
 
     public void registerCommands() {
@@ -59,6 +57,17 @@ public class MobMasks extends JavaPlugin {
         config.addDefault("Mask Levels.Tier 1", 100);
         config.addDefault("Mask Levels.Tier 2", 200);
         config.addDefault("Mask Levels.Tier 3", 300);
+
+        config.addDefault("Creeper Mask.Explosion %.Tier 0", 5);
+        config.addDefault("Creeper Mask.Explosion %.Tier 1", 10);
+        config.addDefault("Creeper Mask.Explosion %.Tier 2", 20);
+        config.addDefault("Creeper Mask.Explosion %.Tier 3", 30);
+        config.addDefault("Creeper Mask.Explosion Power.Tier 0", 1);
+        config.addDefault("Creeper Mask.Explosion Power.Tier 1", 2);
+        config.addDefault("Creeper Mask.Explosion Power.Tier 2", 3);
+        config.addDefault("Creeper Mask.Explosion Power.Tier 3", 4);
+        config.addDefault("Creeper Mask.Nullifies Damage From Other Creeper Masks", true);
+        config.addDefault("Creeper Mask.Explosions Damage Blocks", false);
 
         config.options().copyDefaults(true);
         saveConfig();
