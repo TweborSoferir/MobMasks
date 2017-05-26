@@ -1,8 +1,10 @@
 package en.twebor.mobmasks.maskeffects;
 
 import en.twebor.mobmasks.utils.MaskUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -40,7 +42,10 @@ public class MaskSkeleton {
             for (int i = 0; i < bonusArrows[MaskUtils.getTier(helmMeta)] ; i++) {
                 // Prevents arrows from spawning within each other.
                 newLoc = newLoc.add(0, 0.1, 0);
-                world.spawnArrow(newLoc, direction, arrowSpeed, bonusArrowSpread[MaskUtils.getTier(helmMeta)]);
+                Arrow arrow = world.spawnArrow(newLoc, direction, arrowSpeed,
+                        bonusArrowSpread[MaskUtils.getTier(helmMeta)]);
+                arrow.setPickupStatus(Arrow.PickupStatus.DISALLOWED);
+                arrow.setShooter(player);
             }
         }
     }
