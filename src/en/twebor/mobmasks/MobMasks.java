@@ -6,7 +6,9 @@ import en.twebor.mobmasks.commands.CommandSkull;
 import en.twebor.mobmasks.listeners.BlockListener;
 import en.twebor.mobmasks.listeners.EntityListener;
 import en.twebor.mobmasks.listeners.InventoryListener;
+import en.twebor.mobmasks.listeners.PlayerInteractListener;
 import org.bukkit.Bukkit;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.PluginManager;
@@ -33,6 +35,7 @@ public class MobMasks extends JavaPlugin {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new BlockListener(), this);
         pm.registerEvents(new InventoryListener(), this);
+        pm.registerEvents(new PlayerInteractListener(this), this);
         pm.registerEvents(new EntityListener(this, this.enabledMobs), this);
     }
 

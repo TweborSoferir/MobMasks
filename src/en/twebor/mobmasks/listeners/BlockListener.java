@@ -13,9 +13,9 @@ public class BlockListener implements Listener {
     @EventHandler (priority = EventPriority.HIGHEST)
     public void onBlockPlace(BlockPlaceEvent event) {
         ItemStack item = event.getItemInHand();
-
-        if (item.getItemMeta().hasDisplayName()) {
-            if (item.getItemMeta().getDisplayName().equals("Chicken Mask")) {
+        //Only has Lore if is a mask.
+        if (item.hasItemMeta() && item.getType() == Material.SKULL_ITEM) {
+            if (item.getItemMeta().hasLore()) {
                 // Checks if right clicking against a cauldron.
                 if (event.getBlockAgainst().getType() == Material.CAULDRON) {
                     event.setCancelled(true);
