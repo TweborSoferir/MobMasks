@@ -1,4 +1,4 @@
-package en.twebor.mobmasks.masklogic;
+package en.twebor.mobmasks.maskeffects;
 
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
