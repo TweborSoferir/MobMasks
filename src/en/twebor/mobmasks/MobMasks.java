@@ -35,6 +35,7 @@ public class MobMasks extends JavaPlugin {
         pm.registerEvents(new PlayerInteractListener(this), this);
         pm.registerEvents(new EntityListener(this, this.enabledMobs), this);
         pm.registerEvents(new CreeperMaskDamageListener(this), this);
+        pm.registerEvents(new EntityShootBowListener(this), this);
     }
 
     public void registerCommands() {
@@ -58,16 +59,32 @@ public class MobMasks extends JavaPlugin {
         config.addDefault("Mask Levels.Tier 2", 200);
         config.addDefault("Mask Levels.Tier 3", 300);
 
-        config.addDefault("Creeper Mask.Explosion %.Tier 0", 5);
+        config.addDefault("Creeper Mask.Explosion %.Tier 0", 0);
         config.addDefault("Creeper Mask.Explosion %.Tier 1", 10);
         config.addDefault("Creeper Mask.Explosion %.Tier 2", 20);
         config.addDefault("Creeper Mask.Explosion %.Tier 3", 30);
-        config.addDefault("Creeper Mask.Explosion Power.Tier 0", 1);
+        config.addDefault("Creeper Mask.Explosion Power.Tier 0", 0);
         config.addDefault("Creeper Mask.Explosion Power.Tier 1", 2);
         config.addDefault("Creeper Mask.Explosion Power.Tier 2", 3);
         config.addDefault("Creeper Mask.Explosion Power.Tier 3", 4);
         config.addDefault("Creeper Mask.Nullifies Damage From Other Creeper Masks", true);
         config.addDefault("Creeper Mask.Explosions Damage Blocks", false);
+
+        config.addDefault("Skeleton Mask.Bonus Arrows.Tier 0", 0);
+        config.addDefault("Skeleton Mask.Bonus Arrows.Tier 1", 3);
+        config.addDefault("Skeleton Mask.Bonus Arrows.Tier 2", 3);
+        config.addDefault("Skeleton Mask.Bonus Arrows.Tier 3", 3);
+        config.addDefault("Skeleton Mask.Bonus Arrows %.Tier 0", 0);
+        config.addDefault("Skeleton Mask.Bonus Arrows %.Tier 1", 20);
+        config.addDefault("Skeleton Mask.Bonus Arrows %.Tier 2", 40);
+        config.addDefault("Skeleton Mask.Bonus Arrows %.Tier 3", 60);
+        config.addDefault("Skeleton Mask.Bonus Arrow Velocity", 2.5);
+        config.addDefault("Skeleton Mask.Bonus Arrows Spread.Tier 0", 0);
+        config.addDefault("Skeleton Mask.Bonus Arrows Spread.Tier 1", 5);
+        config.addDefault("Skeleton Mask.Bonus Arrows Spread.Tier 2", 4);
+        config.addDefault("Skeleton Mask.Bonus Arrows Spread.Tier 3", 3);
+
+
 
         config.options().copyDefaults(true);
         saveConfig();
