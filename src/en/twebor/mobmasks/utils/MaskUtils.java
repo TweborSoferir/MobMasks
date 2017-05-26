@@ -7,23 +7,11 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MaskUtils {
 
     private MaskUtils() {
-    }
-
-    public static int getRank(int amount, int[] tiers) {
-        if (amount < tiers[0]) {
-            return 0; //Not enough heads.
-        } else if (amount < tiers[1]) {
-            return 1; //Did not have enough to reach Rank 2,but enough to pass rank 1.
-        } else if (amount < tiers[2]) {
-            return 2;
-        } else if (amount >= tiers[2]) {
-            return 3;
-        }
-        return 0;
     }
 
     public static List<String> createNewLore(int skullsForRank1, String type) {
@@ -114,5 +102,25 @@ public class MaskUtils {
             }
         }
         return null;
+    }
+
+    // Returns Mask Rank.
+    public static int getTier(SkullMeta helmetMeta) {
+        if (helmetMeta.hasLore()) {
+            List<String> lore = helmetMeta.getLore();
+            String[] splitStrRank = lore.get(1).split("\\s+"); //Splits rank by space.  Rank is index 1.
+            int rank = Integer.parseInt(splitStrRank[1]);
+            return rank;
+        } else {
+            return 0;
+        }
+    }
+
+    // Returns a boolean to decide if the effect will occur.
+    public static boolean willTrigger(SkullMeta helmetMeta, int[] effectChances) {
+        int tier = MaskUtils.getTier(helmetMeta);
+        Random random = new Random();
+        int number = random.nextInt(100) + 1;
+        return (number <= effectChances[tier]);
     }
 }
