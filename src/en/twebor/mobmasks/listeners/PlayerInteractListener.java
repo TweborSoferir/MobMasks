@@ -1,6 +1,7 @@
 package en.twebor.mobmasks.listeners;
 
 import en.twebor.mobmasks.utils.MaskUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.entity.Player;
@@ -25,13 +26,19 @@ public class PlayerInteractListener implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         // Checks if cauldron is clicked on.
-        if (event.getClickedBlock().getType() != Material.CAULDRON) return;
+        if (event.hasBlock()) {
+            if (event.getClickedBlock().getType() != Material.CAULDRON) return;
+        }
         ItemStack mainhand = player.getInventory().getItemInMainHand();
         // Immediately cancels if mainhand is not a skull.
-        if (mainhand == null || mainhand.getType() != Material.SKULL_ITEM) return;
+        if (mainhand == null || mainhand.getType() != Material.SKULL_ITEM) {
+            return;
+        }
         ItemStack offhand = player.getInventory().getItemInOffHand();
         //Immediately cancels if offhand is not empty or skull, as to get this far Mainhand is skull/mask.
-        if (offhand.getType() != null && offhand.getType() != Material.SKULL_ITEM) return;
+        if (offhand.getType() != Material.AIR && offhand.getType() != Material.SKULL_ITEM) {
+            return;
+        }
         SkullMeta mainMeta = (SkullMeta) mainhand.getItemMeta();
 
 
@@ -41,35 +48,41 @@ public class PlayerInteractListener implements Listener {
         int[] tiers = {headsForTier1, headsForTier2, headsForTier3};
 
         String type = ""; //Used to pull description for lore
+        String name = ChatColor.AQUA + "";
         if (mainMeta.hasOwner()) {
-            if (mainMeta.getOwner().equals("NO OWNER")) {
-                if (mainhand.getDurability() == SkullType.CREEPER.ordinal()) {
-                    //Creeper case
-                    type = "creeper";
-                } else if (mainhand.getDurability() == SkullType.SKELETON.ordinal()) {
-                    //Skeleton case
-                    type = "skeleton";
-                }
-            } else {
                 switch (mainMeta.getOwner()) {
                     case "gavertoso":
                         type = "horse";
+                        name += "Horse Mask";
                         break;
                     case "Natalieisawesome":
                         type = "rabbit";
+                        name += "Rabbit Mask";
                         break;
                     case "MHF_Blaze":
                         type = "blaze";
+                        name += "Blaze Mask";
                         break;
                     case "MHF_Chicken":
                         type = "chicken";
+                        name += "Chicken Mask";
                         break;
                     case "MHF_Golem":
                         type = "iron golem";
+                        name += "Iron Golem Mask";
                         break;
                     default:
                         return;
                 }
+        } else if (!mainMeta.hasOwner()) {
+            if (mainhand.getDurability() == SkullType.CREEPER.ordinal()) {
+                //Creeper case
+                type = "creeper";
+                name += "Creeper Mask";
+            } else if (mainhand.getDurability() == SkullType.SKELETON.ordinal()) {
+                //Skeleton case
+                type = "skeleton";
+                name += "Skeleton Mask";
             }
         }
         List<String> oldLore = new ArrayList<>();
@@ -77,13 +90,18 @@ public class PlayerInteractListener implements Listener {
         int amount;
         if (!mainMeta.hasLore()) { //This means that mainhand is a skull, not mask.
             amount = mainhand.getAmount(); //Making new mask.
+            mainhand.setAmount(1);
             oldLore = MaskUtils.createNewLore(headsForTier1, type);
             lore = MaskUtils.updateLore(oldLore, amount, tiers);
-            mainhand.setAmount(1); //Set to 1 as the last head becomes the new mask.
+             //Set to 1 as the last head becomes the new mask.
         } else {
             amount = offhand.getAmount(); //Mask will be in mainhand, and so only has to be updated.
             lore = MaskUtils.updateLore(mainMeta.getLore(), amount, tiers);
+            player.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
         }
-        mainhand.getItemMeta().setLore(lore);
+        mainMeta.setLore(lore);
+        mainMeta.setDisplayName(name);
+        mainhand.setItemMeta(mainMeta);
+
     }
 }
