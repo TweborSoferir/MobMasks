@@ -36,6 +36,7 @@ public class MobMasks extends JavaPlugin {
         pm.registerEvents(new EntityListener(this, this.enabledMobs), this);
         pm.registerEvents(new CreeperMaskDamageListener(this), this);
         pm.registerEvents(new EntityShootBowListener(this), this);
+        pm.registerEvents(new PlayerAnimationListener(this), this);
     }
 
     public void registerCommands() {
@@ -84,7 +85,14 @@ public class MobMasks extends JavaPlugin {
         config.addDefault("Skeleton Mask.Bonus Arrows Spread.Tier 2", 4);
         config.addDefault("Skeleton Mask.Bonus Arrows Spread.Tier 3", 3);
 
-
+        config.addDefault("Blaze Mask.Fireball Chance.Tier 0", 0);
+        config.addDefault("Blaze Mask.Fireball Chance.Tier 1", 3);
+        config.addDefault("Blaze Mask.Fireball Chance.Tier 2", 6);
+        config.addDefault("Blaze Mask.Fireball Chance.Tier 3", 10);
+        config.addDefault("Blaze Mask.Fireball Power.Tier 0", 1);
+        config.addDefault("Blaze Mask.Fireball Power.Tier 1", 1);
+        config.addDefault("Blaze Mask.Fireball Power.Tier 2", 1);
+        config.addDefault("Blaze Mask.Fireball Power.Tier 3", 1);
 
         config.options().copyDefaults(true);
         saveConfig();

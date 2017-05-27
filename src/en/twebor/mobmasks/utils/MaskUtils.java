@@ -1,6 +1,7 @@
 package en.twebor.mobmasks.utils;
 
 import en.twebor.mobmasks.Mask;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -117,7 +118,7 @@ public class MaskUtils {
     }
 
     // Returns a boolean to decide if the effect will occur.
-    public static boolean willTrigger(SkullMeta helmetMeta, int[] effectChances) {
+    public static boolean willTriggerMaskEffect(SkullMeta helmetMeta, int[] effectChances) {
         int tier = MaskUtils.getTier(helmetMeta);
         Random random = new Random();
         int number = random.nextInt(100) + 1;

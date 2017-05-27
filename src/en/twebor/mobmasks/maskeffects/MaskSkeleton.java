@@ -1,7 +1,6 @@
 package en.twebor.mobmasks.maskeffects;
 
 import en.twebor.mobmasks.utils.MaskUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Arrow;
@@ -34,7 +33,7 @@ public class MaskSkeleton {
             return;
         }
         SkullMeta helmMeta = (SkullMeta) helmet.getItemMeta();
-        if (MaskUtils.willTrigger(helmMeta, bonusArrowsChance)) {
+        if (MaskUtils.willTriggerMaskEffect(helmMeta, bonusArrowsChance)) {
             Location eyeLoc = player.getEyeLocation();
             World world = eyeLoc.getWorld();
             Vector direction = eyeLoc.getDirection();

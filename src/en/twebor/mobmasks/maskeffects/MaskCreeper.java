@@ -6,9 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.List;
-import java.util.Random;
-
 public class MaskCreeper {
     private ItemStack helmet;
     private int[] explosionChances;
@@ -28,7 +25,7 @@ public class MaskCreeper {
     public void explode() {
         if (helmet.hasItemMeta()) {
             SkullMeta helmMeta = (SkullMeta) this.helmet.getItemMeta();
-            if (MaskUtils.willTrigger(helmMeta, explosionChances)) {
+            if (MaskUtils.willTriggerMaskEffect(helmMeta, explosionChances)) {
                 Location loc = this.playerDamaged.getLocation();
                 loc.getWorld().createExplosion(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(),
                         explosionPower[MaskUtils.getTier(helmMeta)], false, this.blockDamage);
