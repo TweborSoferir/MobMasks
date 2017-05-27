@@ -15,6 +15,7 @@ public class MaskBlaze {
     private Player player;
     private int[] fireballChance;
     private float[] fireballPower;
+    private boolean setsFires;
 
     public MaskBlaze(JavaPlugin plugin, Player player) {
         fireballChance = new int[] {
@@ -27,6 +28,7 @@ public class MaskBlaze {
                 (float) plugin.getConfig().getDouble("Blaze Mask.Fireball Power.Tier 1"),
                 (float) plugin.getConfig().getDouble("Blaze Mask.Fireball Power.Tier 2"),
                 (float) plugin.getConfig().getDouble("Blaze Mask.Fireball Power.Tier 3")};
+        this.setsFires = plugin.getConfig().getBoolean("Blaze Mask.Sets Fires");
         this.player = player;
     }
 
@@ -40,9 +42,10 @@ public class MaskBlaze {
             Location newLoc = loc.add(direction);
 
             Fireball fireball = player.getWorld().spawn(newLoc, Fireball.class);
-            fireball.setDirection(direction.multiply(0.2));
-            fireball.setVelocity(direction.multiply(0.2));
+            fireball.setDirection(direction.multiply(0.4));
+            fireball.setVelocity(direction.multiply(0.4));
             fireball.setYield(fireballPower[tier]);
+            fireball.setIsIncendiary(setsFires);
             fireball.setShooter(player);
         }
     }

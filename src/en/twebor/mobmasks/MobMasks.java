@@ -36,7 +36,8 @@ public class MobMasks extends JavaPlugin {
         pm.registerEvents(new EntityListener(this, this.enabledMobs), this);
         pm.registerEvents(new CreeperMaskDamageListener(this), this);
         pm.registerEvents(new EntityShootBowListener(this), this);
-        pm.registerEvents(new PlayerAnimationListener(this), this);
+        pm.registerEvents(new PlayerLeftClickListener(this), this);
+        pm.registerEvents(new EntityExplodeListener(this), this);
     }
 
     public void registerCommands() {
@@ -89,10 +90,12 @@ public class MobMasks extends JavaPlugin {
         config.addDefault("Blaze Mask.Fireball Chance.Tier 1", 3);
         config.addDefault("Blaze Mask.Fireball Chance.Tier 2", 6);
         config.addDefault("Blaze Mask.Fireball Chance.Tier 3", 10);
-        config.addDefault("Blaze Mask.Fireball Power.Tier 0", 1);
-        config.addDefault("Blaze Mask.Fireball Power.Tier 1", 1);
-        config.addDefault("Blaze Mask.Fireball Power.Tier 2", 1);
-        config.addDefault("Blaze Mask.Fireball Power.Tier 3", 1);
+        config.addDefault("Blaze Mask.Fireball Power.Tier 0", 3F);
+        config.addDefault("Blaze Mask.Fireball Power.Tier 1", 3F);
+        config.addDefault("Blaze Mask.Fireball Power.Tier 2", 3F);
+        config.addDefault("Blaze Mask.Fireball Power.Tier 3", 3F);
+        config.addDefault("Blaze Mask.Block Damage", false);
+        config.addDefault("Blaze Mask.Sets Fires" , true);
 
         config.options().copyDefaults(true);
         saveConfig();
