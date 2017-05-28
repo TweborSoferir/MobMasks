@@ -39,8 +39,13 @@ public class MaskUtils {
         if (rank < 3) {
             goal = Integer.parseInt(splitStrSkulls[2]);
             if (amount + skullsAdded >= goal) { //T1. Ind 0, T2, Ind 1, T3, ind 2
-                nextGoal = tiers[rank];
                 rank++; //Increments Rank by one and update the next goal.
+                if (rank == 3) {
+                    nextGoal = tiers[rank-1];
+                } else {
+                    nextGoal = tiers[rank];
+                }
+                Bukkit.broadcastMessage("Rank-up has run.");
             } else { //Not enough skulls to reach next rank;
                 nextGoal = goal;
             }

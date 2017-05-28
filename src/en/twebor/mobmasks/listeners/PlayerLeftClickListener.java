@@ -11,7 +11,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class PlayerLeftClickListener implements Listener { // Used for the Blaze effect.
+// Used for the Blaze Mask.
+public class PlayerLeftClickListener implements Listener {
     private JavaPlugin plugin;
 
     public PlayerLeftClickListener(JavaPlugin plugin) {

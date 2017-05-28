@@ -38,6 +38,7 @@ public class MobMasks extends JavaPlugin {
         pm.registerEvents(new EntityShootBowListener(this), this);
         pm.registerEvents(new PlayerLeftClickListener(this), this);
         pm.registerEvents(new EntityExplodeListener(this), this);
+        pm.registerEvents(new EntityDamageListener(this), this);
     }
 
     public void registerCommands() {
@@ -96,6 +97,11 @@ public class MobMasks extends JavaPlugin {
         config.addDefault("Blaze Mask.Fireball Power.Tier 3", 3F);
         config.addDefault("Blaze Mask.Block Damage", false);
         config.addDefault("Blaze Mask.Sets Fires" , true);
+
+        config.addDefault("Chicken Mask.Fall Damage Reduction %.Tier 0", 0);
+        config.addDefault("Chicken Mask.Fall Damage Reduction %.Tier 1", 50);
+        config.addDefault("Chicken Mask.Fall Damage Reduction %.Tier 2", 75);
+        config.addDefault("Chicken Mask.Fall Damage Reduction %.Tier 3", 100);
 
         config.options().copyDefaults(true);
         saveConfig();

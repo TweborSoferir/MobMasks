@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
+// Used for the Creeper Mask.
 public class CreeperMaskDamageListener implements Listener {
     private int[] explosionChances;
     private int[] explosionPower;
