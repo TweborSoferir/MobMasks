@@ -38,7 +38,7 @@ public class MobMasks extends JavaPlugin {
         pm.registerEvents(new EntityShootBowListener(this), this);
         pm.registerEvents(new PlayerLeftClickListener(this), this);
         pm.registerEvents(new EntityExplodeListener(this), this);
-        pm.registerEvents(new EntityDamageListener(), this);
+        pm.registerEvents(new EntityDamageListener(this), this);
     }
 
     public void registerCommands() {
