@@ -3,6 +3,8 @@ package en.twebor.mobmasks.utils;
 import en.twebor.mobmasks.Mask;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.SkullType;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
@@ -46,7 +48,6 @@ public class MaskUtils {
             goal = -1;
             nextGoal = -1;
         }
-
         amount += skullsAdded; //Increases regardless of results in if/else
         newLore.add("Rank " + rank);
         if (rank < 3) {
@@ -86,13 +87,11 @@ public class MaskUtils {
         if (item.getType() != Material.SKULL_ITEM) {
             return null;
         }
-
         SkullMeta meta = (SkullMeta) item.getItemMeta();
-
         for (Mask mask : Mask.values()) {
             SkullMeta maskMeta = (SkullMeta) mask.getMask().getItemMeta();
 
-            if (meta.getOwner().equals("NO OWNER")) {
+            if (meta.getOwner().equals("NO OWNER") || !meta.hasOwner()) {
                 if (maskMeta.getDisplayName().equals(meta.getDisplayName())) {
                     return mask;
                 }
@@ -117,11 +116,27 @@ public class MaskUtils {
         }
     }
 
-    // Returns a boolean to decide if the effect will occur.
-    public static boolean willTriggerMaskEffect(SkullMeta helmetMeta, int[] effectChances) {
-        int tier = MaskUtils.getTier(helmetMeta);
-        Random random = new Random();
-        int number = random.nextInt(100) + 1;
-        return (number <= effectChances[tier]);
+    // Returns the skin owner of the given mask.
+    public static String getOwner(Mask mask) {
+        EntityType type = mask.getType();
+        String name = type.name();
+        switch (name) {
+            case "CREEPER":
+                return "NO OWNER";
+            case "SKELETON":
+                return "NO OWNER";
+            case "BLAZE":
+                return "MHF_Blaze";
+            case "CHICKEN":
+                return "MHF_Chicken";
+            case "IRON_GOLEM":
+                return "MHF_Golem";
+            case "HORSE":
+                return "gavertoso";
+            case "RABBIT":
+                return "Natalieisawesome";
+            default:
+                return "Invalid Mask";
+        }
     }
 }

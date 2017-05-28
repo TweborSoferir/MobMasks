@@ -1,8 +1,8 @@
 package en.twebor.mobmasks.listeners;
 
+import en.twebor.mobmasks.Mask;
 import en.twebor.mobmasks.maskeffects.MaskSkeleton;
-import org.bukkit.Material;
-import org.bukkit.SkullType;
+import en.twebor.mobmasks.utils.MaskEffectUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -10,7 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EntityShootBowListener implements Listener {
@@ -42,56 +41,22 @@ public class EntityShootBowListener implements Listener {
     public void onEntityShootBow(EntityShootBowEvent event) {
         Entity entity = event.getEntity();
         // Entity is null if the arrows were spawned by the mask effect.
-        if (entity == null) {
-            return;
-        }
+        if (entity == null) return;
         // Cancels if Entity that fired the arrow was not a player.
-        if (entity.getType() != EntityType.PLAYER) {
-            return;
-        }
+        if (entity.getType() != EntityType.PLAYER) return;
 
         Player player = (Player) entity;
         ItemStack helm = player.getInventory().getHelmet();
         // If invalid Mask, cancels.
-        if (!isValidMask(helm)) {
-            return;
-        }
+        if (!MaskEffectUtils.isValidMask(helm, Mask.SKELETON)) return;
         Float arrowSpeed = bonusArrowVelocity;
 
-        // If not fully drawn, speed is based on draw force, to prevent spamming of low draw shots.
+        // If not fully drawn, speed is based on draw force, to prevent low draw shots from having full speed.
         if (event.getForce() < .9) {
             arrowSpeed = event.getForce() * 2;
         }
         MaskSkeleton skeletonEffect = new MaskSkeleton(player, bonusArrows, bonusArrowsChance, bonusArrowSpread,
                 arrowSpeed);
         skeletonEffect.multishot();
-    }
-
-    private boolean isValidMask(ItemStack helm) {
-        if (helm == null) {
-            return false;
-        }
-        if (helm.getType() != Material.SKULL_ITEM) {
-            return false;
-            // Next it checks the skulls owner and meta.
-        } else {
-            if (helm.hasItemMeta()) {
-                SkullMeta helmMeta = (SkullMeta) helm.getItemMeta();
-                // Cancels if Skull worn has an owner, as then its not a Skeleton skull.
-                if (helmMeta.hasOwner()) {
-                    return false;
-                    //Cancels if the head's durability does not match the Skeleton ordinal.
-                } else {
-                    if (helm.getDurability() != SkullType.SKELETON.ordinal()) {
-                        return false;
-                    }
-                }
-                // Cancels if head does not have Lore.  Masks must have Lore.
-                if (!helmMeta.hasLore()) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }

@@ -1,12 +1,10 @@
 package en.twebor.mobmasks.maskeffects;
 
+import en.twebor.mobmasks.utils.MaskEffectUtils;
 import en.twebor.mobmasks.utils.MaskUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Fireball;
-import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.SmallFireball;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
@@ -36,7 +34,7 @@ public class MaskBlaze {
         // Helm has already been checked as valid in the Listener.
         SkullMeta helmMeta = (SkullMeta) player.getInventory().getHelmet().getItemMeta();
         int tier = MaskUtils.getTier(helmMeta);
-        if (MaskUtils.willTriggerMaskEffect(helmMeta, fireballChance)) {
+        if (MaskEffectUtils.willTriggerMaskEffect(helmMeta, fireballChance)) {
             Location loc = player.getEyeLocation();
             Vector direction = loc.getDirection();
             Location newLoc = loc.add(direction);

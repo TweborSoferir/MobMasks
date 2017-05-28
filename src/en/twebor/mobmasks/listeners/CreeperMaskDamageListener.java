@@ -1,7 +1,8 @@
 package en.twebor.mobmasks.listeners;
 
+import en.twebor.mobmasks.Mask;
 import en.twebor.mobmasks.maskeffects.MaskCreeper;
-import org.bukkit.*;
+import en.twebor.mobmasks.utils.MaskEffectUtils;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,7 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CreeperMaskDamageListener implements Listener {
@@ -46,19 +46,14 @@ public class CreeperMaskDamageListener implements Listener {
                 damagerType == EntityType.FISHING_HOOK) {
             return;
         }
-        // Cancels if entity is not a player
-        if (event.getEntity().getType() != EntityType.PLAYER) {
-            return;
-        }
+        // Cancels if entity damaged is not a player
+        if (event.getEntity().getType() != EntityType.PLAYER) return;
 
         Player playerDamaged = (Player) event.getEntity();
         // Cancels if helmet is not a valid mask/
         ItemStack helm = playerDamaged.getInventory().getHelmet();
 
-        if (!isValidMask(helm)) {
-            return;
-        }
-
+        if (!MaskEffectUtils.isValidMask(helm, Mask.CREEPER)) return;
         MaskCreeper creeperEffect = new MaskCreeper(playerDamaged, helm, explosionChances, explosionPower,
                 blockDamage);
         creeperEffect.explode();
@@ -76,41 +71,11 @@ public class CreeperMaskDamageListener implements Listener {
                 if (event.getEntity().getType() == EntityType.PLAYER) {
                     Player player = (Player) event.getEntity();
                     // And then checks if the player has a valid mask equipped.
-                    if (isValidMask(player.getInventory().getHelmet())) {
+                    if (MaskEffectUtils.isValidMask(player.getInventory().getHelmet(), Mask.CREEPER)) {
                         event.setCancelled(true);
                     }
                 }
             }
         }
     }
-
-    private boolean isValidMask(ItemStack helm) {
-        if (helm == null) {
-            return false;
-        }
-        if (helm.getType() != Material.SKULL_ITEM) {
-            return false;
-            // Next it checks the skulls owner and meta.
-        } else {
-            if (helm.hasItemMeta()) {
-                SkullMeta helmMeta = (SkullMeta) helm.getItemMeta();
-                // Cancels if Skull worn has an owner, as then its not a Creeper head.
-                if (helmMeta.hasOwner()) {
-                    return false;
-                    //Cancels if the head's durability does not match the Creeper ordinal.
-                } else {
-                    if (helm.getDurability() != SkullType.CREEPER.ordinal()) {
-                        return false;
-                    }
-                }
-                // Cancels if head does not have Lore.  Masks must have Lore.
-                if (!helmMeta.hasLore()) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-
 }

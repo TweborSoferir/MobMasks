@@ -1,5 +1,6 @@
 package en.twebor.mobmasks.maskeffects;
 
+import en.twebor.mobmasks.utils.MaskEffectUtils;
 import en.twebor.mobmasks.utils.MaskUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -25,7 +26,7 @@ public class MaskCreeper {
     public void explode() {
         if (helmet.hasItemMeta()) {
             SkullMeta helmMeta = (SkullMeta) this.helmet.getItemMeta();
-            if (MaskUtils.willTriggerMaskEffect(helmMeta, explosionChances)) {
+            if (MaskEffectUtils.willTriggerMaskEffect(helmMeta, explosionChances)) {
                 Location loc = this.playerDamaged.getLocation();
                 loc.getWorld().createExplosion(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(),
                         explosionPower[MaskUtils.getTier(helmMeta)], false, this.blockDamage);
