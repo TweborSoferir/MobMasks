@@ -18,6 +18,7 @@ public class EntityShootBowListener implements Listener {
     private float[] bonusArrowSpread;
     private float bonusArrowVelocity;
 
+    // Used for the Skeleton Mask.
     public EntityShootBowListener(JavaPlugin plugin) {
         this.bonusArrows = new int[] {
                 plugin.getConfig().getInt("Skeleton Mask.Bonus Arrows.Tier 0"),
