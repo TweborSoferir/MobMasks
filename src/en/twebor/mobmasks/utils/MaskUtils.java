@@ -45,7 +45,6 @@ public class MaskUtils {
                 } else {
                     nextGoal = tiers[rank];
                 }
-                Bukkit.broadcastMessage("Rank-up has run.");
             } else { //Not enough skulls to reach next rank;
                 nextGoal = goal;
             }

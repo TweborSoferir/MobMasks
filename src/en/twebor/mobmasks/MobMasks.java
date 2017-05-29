@@ -103,6 +103,12 @@ public class MobMasks extends JavaPlugin {
         config.addDefault("Chicken Mask.Fall Damage Reduction %.Tier 2", 75);
         config.addDefault("Chicken Mask.Fall Damage Reduction %.Tier 3", 100);
 
+        config.addDefault("Iron Golem Mask.Damage Reduction %.Tier 0", 0);
+        config.addDefault("Iron Golem Mask.Damage Reduction %.Tier 1", 10);
+        config.addDefault("Iron Golem Mask.Damage Reduction %.Tier 2", 20);
+        config.addDefault("Iron Golem Mask.Damage Reduction %.Tier 3", 30);
+
+
         config.options().copyDefaults(true);
         saveConfig();
     }
