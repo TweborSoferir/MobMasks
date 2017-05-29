@@ -24,6 +24,11 @@ public class EntityDamageListener implements Listener {
                 1 - plugin.getConfig().getDouble("Chicken Mask.Fall Damage Reduction %.Tier 1") / 100,
                 1 - plugin.getConfig().getDouble("Chicken Mask.Fall Damage Reduction %.Tier 2") / 100,
                 1- plugin.getConfig().getDouble("Chicken Mask.Fall Damage Reduction %.Tier 3") / 100};
+        entityAttackDamageReduction = new double[] {
+                1 - plugin.getConfig().getDouble("Iron Golem Mask.Damage Reduction %.Tier 0") / 100,
+                1 - plugin.getConfig().getDouble("Iron Golem Mask.Damage Reduction %.Tier 1") / 100,
+                1 - plugin.getConfig().getDouble("Iron Golem Mask.Damage Reduction %.Tier 2") / 100,
+                1 - plugin.getConfig().getDouble("Iron Golem Mask.Damage Reduction %.Tier 3") / 100};
     }
 
     @EventHandler
@@ -60,6 +65,7 @@ public class EntityDamageListener implements Listener {
             helmMeta = (SkullMeta) helm.getItemMeta();
         }
         // Multiplies the events damage by the reduction and sets the resulting value as the new one.
+        event.setDamage(event.getDamage() * entityAttackDamageReduction[MaskUtils.getTier(helmMeta)]);
     }
 }
 
